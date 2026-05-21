@@ -6,7 +6,7 @@
     <title>《Articulate Talk》 마스터 원고 및 인터랙티브 북</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@400;500;700;900&swap" rel="stylesheet">
     <style>
         *, *::before, *::after {
             box-sizing: border-box;
@@ -158,23 +158,6 @@
         }
         .btn-toggle:hover {
             background-color: #8c3228;
-        }
-
-        .btn-secondary {
-            background-color: #ffffff;
-            color: #4a3e3d;
-            border: 1px solid var(--border-color);
-            padding: 10px 15px;
-            font-family: 'Noto Sans KR', sans-serif;
-            font-size: 9.5pt;
-            font-weight: 500;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
-        }
-        .btn-secondary:hover {
-            background-color: #f7f4eb;
         }
 
         /* 우측 본문 영역 */
@@ -599,28 +582,6 @@
             text-transform: uppercase;
         }
 
-        .toast-notification {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #332a24;
-            color: #ffffff;
-            padding: 15px 25px;
-            border-radius: 8px;
-            font-family: 'Noto Sans KR', sans-serif;
-            font-size: 10pt;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-            z-index: 1000;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-            pointer-events: none;
-        }
-        .toast-notification.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         /* 웹 뷰어 조판 최적화 모드 시 활성화될 클래스 */
         .print-mode {
             background-color: #e5e5e5;
@@ -728,9 +689,6 @@
             <button class="btn-toggle" onclick="togglePrintMode()">
                 조판 미리보기 토글
             </button>
-            <button class="btn-secondary" onclick="saveWorkbookData()">
-                워크북 입력 내용 저장
-            </button>
         </div>
     </aside>
 
@@ -836,7 +794,7 @@
                 </div>
 
                 <div class="section-title">01. 그들은 입을 열기 전에 '구조'를 짠다</div>
-                <p>아마추어 화자와 프로 커뮤니케이터의 가장 결정적인 차이는 '언제 생각을 시작하는가'에 있습니다. 하위 99%의 사람들은 일단 입을 열고 목소리를 내면서 동시에 생각을 시작합니다. 반면, 상위 1%의 프로들은 말하기 전에 머릿속에서 이미 메시지의 설계도를 완성합니다.</p>
+                <p>아마추어 화자와 프로 커뮤니케이터의 가장 결정적인 차이는 '언제 생각을 시작하는가'에 있습니다. 하위 99%의 사람들은 일단 입을 열면서 동시에 생각을 시작합니다. 반면, 상위 1%의 프로들은 말하기 전에 머릿속에서 이미 메시지의 설계도를 완성합니다.</p>
                 <p>프로들은 아무리 긴박한 상황이나 돌발 질문을 받더라도 즉각적으로 입을 열지 않습니다. 짧게는 1초에서 3초간 머릿속 공간을 나누고 이야기를 배치하는 구조화 과정을 반드시 거칩니다.</p>
 
                 <div class="case-study-box">
@@ -904,7 +862,6 @@
                         <div class="script-bad">
                             <div class="script-label">✗ 낮은 해상도의 어휘력 (아마추어)</div>
                             <div class="script-text">"이번 프로젝트는 저희 팀원들이 진짜 대박 열심히 해서, 결과가 엄청 좋게 나와서 뿌듯합니다. 초반에는 솔직히 좀 빡셌는데..."</div>
-                            <div class="script-analysis">분석: '대박', '엄청', '빡셌는데' 등 퉁치는 감정어가 난무하여 비즈니스 전문성을 보여주지 못합니다.</div>
                         </div>
                         <div class="script-good">
                             <div class="script-label">✓ 고해상도의 적확한 어휘력 (프로페셔널)</div>
@@ -955,7 +912,7 @@
                 </div>
 
                 <div class="section-title">01. 결론부터 말해도 무례하지 않은 법</div>
-                <p>배경과 맥락을 먼저 길게 깔고 마지막에 본심을 조심스럽게 드러내는 것은 비즈니스 소통에서 상대의 귀중한 에너지를 낭비하게 만드는 진짜 '무례'입니다. 결론부터 던지는 두괄식 스피치의 칼날에 온화한 '완충재(Buffer)'의 프레임을 씌워 전달한다면, 상대의 감정을 상하게 하지 않고 본질을 우아하게 관통할 수 있습니다.</p>
+                <p>배경과 맥락을 먼저 길게 깔고 마지막에 본심을 드러내는 것은 비즈니스 소통에서 상대의 귀중한 에너지를 낭비하게 만드는 진짜 '무례'입니다. 결론부터 던지는 두괄식 스피치의 칼날에 온화한 '완충재(Buffer)'의 프레임을 씌워 전달한다면, 상대의 감정을 상하게 하지 않고 본질을 우아하게 관통할 수 있습니다.</p>
 
                 <div class="sub-heading">1문장 1메시지: 뇌가 기억하기 쉬운 단위</div>
                 <p>문장이 길어지면 주어와 서술어의 호응이 깨지고 청자는 길을 잃습니다. 하나의 문장 안에는 오직 하나의 생각, 하나의 행동, 하나의 사실만 담아야 합니다(<span class="highlight">1문장 1메시지</span>). 문장을 짧은 단문으로 쪼개어 전달하고 마침표 뒤에 숨을 고르는 1초의 침묵(Pause)을 선물하십시오.</p>
@@ -1411,7 +1368,7 @@
                 <p>소통의 카리스마를 장착하겠다고 무조건 내 성향에 맞지 않는 껍데기를 연출하면 청중은 본능적으로 위선을 감지해 불편해합니다. 내가 차분하고 내향적인 타입이라면 날카로운 딕션과 의도적인 긴 포즈(Pause)를 무기 삼고, 외향적인 성향이라면 1문장 1메시지로 속도를 제어하는 보완책을 세팅해 나다운 말하기를 연마해야 합니다.</p>
 
                 <div class="sub-heading">카리스마의 두 축: 힘(Power)과 따뜻함(Warmth)</div>
-                <p>독보적인 카리스마를 발산하려면 결론을 짓는 논리의 선언인 <span class="highlight">'힘'</span>과, 경청과 존중의 시선인 <span class="highlight">'따뜻함'</span>의 적절한 조화가 이루어져야 합니다. 부드럽게 공감해 주면서도 결정을 내려야 하는 순간에 표정을 싹 바꾸어 냉철한 이성의 팩트를 내던지는 입체적인 결합에서 가장 치명적인 설득의 우위가 확보됩니다.</p>
+                <p>독보적인 카리스마를 발산하려면 결론을 짓는 논리의 선언인 <span class="highlight">'힘'</span>과, 경청과 존중의 시선인 <span class="highlight">'따뜻함'</span>의 적절한 조화가 이루어야 합니다. 부드럽게 공감해 주면서도 결정을 내려야 하는 순간에 표정을 싹 바꾸어 냉철한 이성의 팩트를 내던지는 입체적인 결합에서 가장 치명적인 설득의 우위가 확보됩니다.</p>
 
                 <div class="case-study-box">
                     <h4>[Case Study] 내향형 리더의 조용한 카리스마</h4>
@@ -1446,7 +1403,7 @@
                 </div>
 
                 <div class="section-title">01. 단 한 마디의 말이 인생의 궤적을 바꾼 순간들</div>
-                <p>비즈니스와 일상에서 가장 결정적인 타이밍에 내뱉은 정제된 한마디는 인생을 영원히 역동적으로 변형시킵니다. 입안에 머문 침묵, 준비 없이 던진 횡설수설의 대가는 뼈아픕니다. 내 실력이 한 장의 슬라이드에 다 표현되지 못할 때, 내 아티큘레이트 토크(Articulate Talk)는 세상을 두드려 열어줄 만능 마스터키가 됩니다.</p>
+                <p>비즈니스와 일상에서 가장 결정적인 타이밍에 내뱉은 정제된 한마디는 인생을 영원히 역동적으로 변형시킵니다. 입안에 머문 침묵, 준비 없이 던진 횡설수설의 대가는 뼈아릅니다. 내 실력이 한 장의 슬라이드에 다 표현되지 못할 때, 내 아티큘레이트 토크(Articulate Talk)는 세상을 두드려 열어줄 만능 마스터키가 됩니다.</p>
 
                 <div class="sub-heading">세상을 움직인 리더들의 책임감 가득한 주어 설정</div>
                 <p>위대한 리더들의 언어 속에는 <span class="highlight">'내가 무엇을 어떻게 결정하고 처리하겠다'</span>는 1인칭의 당당하고 책임감 있는 단어가 살아 숨 쉽니다. 모호하게 배경에 책임을 묻는 3인칭의 수동적인 화법을 버리고, 주어가 확실한 1인칭의 용기를 입가에 덧씌워보십시오.</p>
@@ -1630,60 +1587,12 @@
     function togglePrintMode() {
         const appWrapper = document.getElementById('appWrapper');
         appWrapper.classList.toggle('print-mode');
-        showToast(appWrapper.classList.contains('print-mode') ? "조판 모드 활성화: 프린트 및 화면 조판 확인에 최적화되었습니다." : "웹 뷰어 모드로 전환되었습니다.");
     }
 
-    // 워크북 데이터 자동 임시 저장 및 불러오기
-    const textareas = document.querySelectorAll('.workbook-textarea, .workbook-input');
-
-    // 불러오기
+    // 초기화 및 자가 진단 점수 계산
     window.addEventListener('DOMContentLoaded', () => {
-        textareas.forEach(el => {
-            const key = el.getAttribute('data-key');
-            if (key) {
-                const savedVal = localStorage.getItem(key);
-                if (savedVal) {
-                    el.value = savedVal;
-                }
-            }
-        });
-        
-        // 체크리스트 로드
-        const chkInputs = document.querySelectorAll('.chk-input');
-        chkInputs.forEach((chk, index) => {
-            const checked = localStorage.getItem(`checklist_${index}`) === 'true';
-            chk.checked = checked;
-        });
         calculateScore();
     });
-
-    // 수동 저장 및 자동 토스트
-    function saveWorkbookData() {
-        textareas.forEach(el => {
-            const key = el.getAttribute('data-key');
-            if (key) {
-                localStorage.setItem(key, el.value);
-            }
-        });
-        
-        // 체크리스트 저장
-        const chkInputs = document.querySelectorAll('.chk-input');
-        chkInputs.forEach((chk, index) => {
-            localStorage.setItem(`checklist_${index}`, chk.checked);
-        });
-
-        showToast("워크북 내용이 브라우저 로컬 저장소에 영구히 저장되었습니다!");
-    }
-
-    // 토스트 알림창 띄우기
-    function showToast(message) {
-        const toast = document.getElementById('toast');
-        toast.innerText = message;
-        toast.classList.add('show');
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, 3000);
-    }
 
     // 자가 진단 체크리스트 스코어 및 개별 처방 자동화
     function calculateScore() {
