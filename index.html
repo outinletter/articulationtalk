@@ -29,12 +29,12 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             font-family: 'Nanum Myeongjo', 'AppleMyungjo', 'Batang', serif;
-            line-height: 2.0; /* A4 넓은 판형에 가장 안정적인 황금 행간 */
-            letter-spacing: -0.02em; /* 명조체의 가독성을 높이는 정교한 미세 자간 */
+            line-height: 2.0; /* 웹 화면용 황금 행간 */
+            letter-spacing: -0.02em; /* 명조체 가독성을 위한 미세 자간 */
             margin: 0;
             padding: 0;
             transition: background-color 0.3s ease;
-            word-break: keep-all; /* 조사 및 한글 단어 쪼개짐 철저 방지 */
+            word-break: keep-all; /* 한글 형태소 단어 단위 개행 유지 */
             overflow-wrap: break-word;
         }
 
@@ -54,12 +54,12 @@
             top: 0;
             left: 0;
             bottom: 0;
-            z-index: 200; /* 백드롭보다 높게 설정 */
+            z-index: 200;
             display: flex;
             flex-direction: column;
             box-shadow: 10px 0 30px rgba(44, 37, 32, 0.05);
-            transform: translateX(-100%); /* 기본 상태: 보이지 않게 왼쪽으로 숨김 */
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); /* 프리미엄 가속도 곡선 적용 */
+            transform: translateX(-100%); /* 기본 상태: 왼쪽으로 숨김 */
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         /* 목차가 활성화되었을 때 슬라이드 인 */
@@ -67,7 +67,7 @@
             transform: translateX(0);
         }
 
-        /* 흐릿하고 고급스러운 화면 디밍 효과(Backdrop Blur Overlay) */
+        /* 화면 디밍 효과(Backdrop Blur Overlay) */
         .sidebar-backdrop {
             position: fixed;
             top: 0;
@@ -87,7 +87,7 @@
             pointer-events: auto;
         }
 
-        /* 유려한 플로팅 목차 토글 버튼 */
+        /* 플로팅 목차 토글 버튼 */
         .toc-toggle-btn {
             position: fixed;
             top: 25px;
@@ -193,9 +193,9 @@
             border-radius: 0 6px 6px 0;
         }
 
-        /* 우측 본문 영역 (목차가 들어가고 완벽히 센터 정렬) */
+        /* 우측 본문 영역 (완벽 센터 조판) */
         .main-content {
-            margin-left: 0; /* 목차가 접혀있으므로 왼쪽 마진 제거 */
+            margin-left: 0;
             flex: 1;
             padding: 50px 20px;
             display: flex;
@@ -204,12 +204,12 @@
             width: 100%;
         }
 
-        /* A4 판형 시뮬레이터 (책 내지 레이아웃 최적화) */
+        /* A4 판형 시뮬레이터 */
         .book-container {
             width: var(--page-width);
             min-height: var(--page-height);
             background-color: var(--page-bg);
-            padding: 30mm 28mm; /* A4 가로폭에 안성맞춤인 조판 여백 적용 */
+            padding: 30mm 28mm; /* 단행본용 최적의 조판 여백 */
             box-shadow: 0 10px 40px rgba(0,0,0,0.06);
             border-radius: 2px;
             position: relative;
@@ -218,7 +218,7 @@
 
         /* 출판 스타일링 정의 */
         .part-intro-page {
-            height: 220mm; /* A4 스케일에 맞춘 타이틀 페이지 높이 */
+            height: 220mm;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -285,7 +285,7 @@
             margin-bottom: 45px;
             font-weight: 900;
             line-height: 1.4;
-            letter-spacing: -0.04em; /* 컴팩트한 타이틀 자간 */
+            letter-spacing: -0.04em;
             word-break: keep-all;
         }
 
@@ -295,7 +295,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 160mm; /* A4 비율에 맞춰 확장 */
+            height: 160mm;
             background-color: #fdfcfb;
             border: 1px solid var(--border-color);
             margin-bottom: 60px;
@@ -358,10 +358,10 @@
         }
 
         p {
-            font-size: 11.5pt; /* A4 가로폭에 최적화된 편안한 본문 글자 크기 */
-            text-align: justify; /* 양끝 정렬 정밀 조율 */
+            font-size: 11.5pt;
+            text-align: justify;
             text-justify: inter-word;
-            text-indent: 1em; /* 문단 첫 들여쓰기 유지 */
+            text-indent: 1em;
             margin-top: 0;
             margin-bottom: 1.8em;
             color: #332a24;
@@ -671,7 +671,7 @@
             }
             .book-container {
                 width: 100%;
-                padding: 20px 15px; /* 모바일에서 컴팩트한 여백 */
+                padding: 20px 15px;
             }
             .part-intro-page {
                 height: auto;
@@ -682,11 +682,95 @@
                 padding: 30px 15px;
             }
         }
-        
-        /* 인쇄 전용 룰 */
+
+        /* =================================================== */
+        /* PRINT STYLING (A4 PDF 용지 잘림 원천 차단 핵심 규칙) */
+        /* =================================================== */
         @media print {
+            @page {
+                size: A4;                  /* 표준 A4 규격 지정 */
+                margin: 20mm 20mm 20mm 25mm; /* 제책(Binding) 선을 고려한 좌측 여백 증설 조판 */
+            }
+            
+            body {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+                font-size: 11pt !important; /* 인쇄 가독성 표준 폰트 스케일 적용 */
+                line-height: 1.85 !important;
+                letter-spacing: -0.03em !important;
+            }
+
+            /* 웹 전용 컨트롤러 요소들 인쇄 시 완전 숨김 */
             .toc-toggle-btn, .sidebar, .sidebar-backdrop {
                 display: none !important;
+            }
+
+            /* 넓은 인쇄 전용 캔버스 영역 선언 */
+            .main-content {
+                margin-left: 0 !important;
+                padding: 0 !important;
+                display: block !important;
+                width: 100% !important;
+            }
+
+            /* A4 인쇄 가로폭(100%)에 맞춰 자동 스케일 다운 유도 */
+            .book-container {
+                width: 100% !important;
+                max-width: 100% !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                background: transparent !important;
+                border: none !important;
+            }
+
+            /* 색상 보존 강제 적용 (상자들의 배경색이 하얗게 날아가는 현상 차단) */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            /* 단행본용 자동 페이지 피딩(Page Break) 제어 */
+            .part-intro-page, .chapter-header, #epilogue, #appendix {
+                page-break-before: always !important;
+                break-before: page !important;
+            }
+            .chapter-header:first-of-type, #intro {
+                page-break-before: avoid !important;
+                break-before: avoid !important;
+            }
+
+            /* 파트 대문 장 페이지 높이 채우기 */
+            .part-intro-page {
+                height: 250mm !important; /* A4 용지 안에서 센터 배치를 위한 여백 보장 */
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: center !important;
+                align-items: center !important;
+                border: none !important;
+            }
+
+            /* 본문 내 박스 구성 요소들이 인쇄 페이지 경계선에서 어설프게 잘리는 사고 원천 방지 */
+            p, .case-study-box, .quote-box, .example-box, .script-box, .workbook-section, .checklist-table, .result-box {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            /* 제목만 페이지 하단에 홀로 남고 내용은 다음 페이지로 넘어가는 현상 방지 */
+            h1, h2, h3, h4, h5, h6, .section-title, .sub-heading {
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+            }
+
+            /* 입력 영역 인쇄 최적화 */
+            .workbook-input {
+                border-bottom: 1px dashed #000000 !important;
+                color: #000000 !important;
+            }
+            .workbook-textarea {
+                border: 1px solid #000000 !important;
+                background-color: #ffffff !important;
+                color: #000000 !important;
             }
         }
     </style>
@@ -847,7 +931,7 @@
                 </div>
 
                 <div class="section-title">01. 그들은 입을 열기 전에 '구조'를 짠다</div>
-                <p>A마추어 화자와 프로 커뮤니케이터의 가장 결정적인 차이는 '언제 생각을 시작하는가'에 있습니다. 하위 99%의 사람들은 입을 열면서 동시에 생각을 시작합니다. 반면, 상위 1%의 프로들은 말하기 전에 머릿속에서 이미 메시지의 설계도를 완성합니다.</p>
+                <p>아마추어 화자와 프로 커뮤니케이터의 가장 결정적인 차이는 '언제 생각을 시작하는가'에 있습니다. 하위 99%의 사람들은 입을 열면서 동시에 생각을 시작합니다. 반면, 상위 1%의 프로들은 말하기 전에 머릿속에서 이미 메시지의 설계도를 완성합니다.</p>
                 <p>프로들은 아무리 긴박한 상황이나 돌발 질문을 받더라도 즉각적으로 입을 열지 않습니다. 짧게는 1초에서 3초간 머릿속 공간을 나누고 이야기를 배치하는 구조화 과정을 반드시 거칩니다.</p>
 
                 <div class="case-study-box">
@@ -1324,7 +1408,7 @@
                 <h2 class="chapter-title">Chapter 12. 무대 위에서 당신을 증명하는 법</h2>
 
                 <div class="pull-quote-page">
-                    <h3>"발표 불안은 없새는 것이 아니라,<br>다스리는 것이다."</h3>
+                    <h3>"발표 불안은 없애는 것이 아니라,<br>다스리는 것이다."</h3>
                     <p>요동치는 심장 박동은 당신이 실패할 것이라는 경고음이 아닙니다.<br>당신이 지금 최고의 퍼포먼스를 내기 위해 스스로를 완벽하게 예열하고 있다는 가장 긍정적인 신호입니다.</p>
                 </div>
 
