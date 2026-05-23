@@ -29,7 +29,7 @@
             color: var(--text-color);
             font-family: 'Nanum Myeongjo', 'AppleMyungjo', 'Batang', serif;
             line-height: 2.0; /* 본문 황금 행간 */
-            letter-spacing: -0.02em; /* 명조체 최적 자간 */
+            letter-spacing: -0.025em; /* 명조체 가독성을 위한 미세 자간 */
             margin: 0;
             padding: 0;
             transition: background-color 0.3s ease;
@@ -37,14 +37,14 @@
             overflow-wrap: break-word;
         }
 
-        /* 전체 레이아웃 (사이드바 없이 온전히 가운데 정렬) */
+        /* 전체 레이아웃 (온전히 가운데 정렬) */
         .app-wrapper {
             display: flex;
             min-height: 100vh;
             position: relative;
         }
 
-        /* 우측 본문 영역 (완벽 센터 조판) */
+        /* 본문 영역 (완벽 센터 조판) */
         .main-content {
             margin-left: 0;
             flex: 1;
@@ -120,11 +120,13 @@
         
         /* [개선] 클래식 단행본 룰에 기반한 견고한 마스킹 도트 리더 디자인 */
         .toc-item {
-            position: relative;
-            margin-bottom: 12px;
+            display: block;
+            clear: both;
+            margin-bottom: 14px;
             font-size: 10.5pt;
-            line-height: 1.5;
-            overflow: hidden; /* 영역 밖으로 삐져나가는 도트 클리핑 */
+            line-height: 1.6;
+            position: relative;
+            overflow: hidden;
         }
         .toc-item::after {
             content: " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
@@ -147,7 +149,8 @@
             font-family: 'Noto Sans KR', sans-serif;
             font-weight: 500;
             word-break: keep-all;
-            display: inline; /* 텍스트가 여러 줄이어도 마스크 영역이 본문 텍스트에만 딱 달라붙음 */
+            float: left;
+            max-width: 85%;
         }
         .toc-page-num {
             background-color: var(--page-bg);
@@ -157,9 +160,15 @@
             font-weight: 700;
             color: var(--accent-burgundy);
             font-family: 'Noto Sans KR', sans-serif;
-            float: right; /* 제목이 두 줄일 경우 항상 마지막 줄의 우측에 우아하게 안착 */
+            float: right;
             white-space: nowrap;
-            line-height: 1.5;
+        }
+        .toc-leader {
+            display: block;
+            overflow: hidden;
+            height: 1.3em;
+            border-bottom: 1.5px dotted #e3dbcf;
+            margin-top: -3px;
         }
 
         /* 출판 스타일링 정의 */
@@ -307,7 +316,7 @@
             font-size: 11.5pt;
             text-align: justify;
             text-justify: inter-word;
-            text-indent: 1em;
+            text-indent: 1.2em;
             margin-top: 0;
             margin-bottom: 1.8em;
             color: #332a24;
@@ -601,16 +610,6 @@
         }
 
         @media (max-width: 768px) {
-            .sidebar {
-                width: 290px;
-                position: fixed;
-                top: 0;
-                left: 0;
-                bottom: 0;
-                z-index: 200;
-                border-right: 1px solid var(--border-color);
-                border-bottom: none;
-            }
             .main-content {
                 margin-left: 0;
                 padding: 15px;
@@ -682,11 +681,11 @@
                 print-color-adjust: exact !important;
             }
 
-            /* 단행본용 자동 페이지 피딩(Page Break) 및 상부 30mm 여백 규칙 제어 */
+            /* 단행본용 자동 페이지 피딩(Page Break) 및 상부 35mm 여백 규칙 제어 */
             .part-intro-page, .chapter-header, #epilogue, #appendix, #toc-page {
                 page-break-before: always !important;
                 break-before: page !important;
-                padding-top: 30mm !important; /* 챕터 시작 시 충분한 상부 여백 제공 */
+                padding-top: 35mm !important; /* 챕터 시작 시 충분한 상부 여백 제공 */
                 margin-top: 0 !important;
             }
             .chapter-header:first-of-type, #intro {
@@ -706,7 +705,7 @@
             }
 
             /* 본문 내 박스 구성 요소들이 인쇄 페이지 경계선에서 어설프게 잘리는 사고 원천 방지 */
-            p, .case-study-box, .quote-box, .example-box, .script-box, .workbook-section, .checklist-table, .result-box, .toc-grid {
+            .case-study-box, .quote-box, .example-box, .script-box, .workbook-section, .checklist-table, .result-box, .toc-grid {
                 page-break-inside: avoid !important;
                 break-inside: avoid !important;
             }
@@ -777,14 +776,17 @@
                             <li class="toc-item">
                                 <span class="toc-name">Chapter 1. 단순히 '말 잘하는 것'의 함정</span>
                                 <span class="toc-page-num">5</span>
+                                <span class="toc-leader"></span>
                             </li>
                             <li class="toc-item">
                                 <span class="toc-name">Chapter 2. 상위 1% 프로 커뮤니케이터의 비밀</span>
                                 <span class="toc-page-num">11</span>
+                                <span class="toc-leader"></span>
                             </li>
                             <li class="toc-item">
                                 <span class="toc-name">Chapter 3. 말은 곧 밖으로 나온 '생각'이다</span>
                                 <span class="toc-page-num">17</span>
+                                <span class="toc-leader"></span>
                             </li>
                         </ul>
                     </div>
@@ -795,14 +797,17 @@
                             <li class="toc-item">
                                 <span class="toc-name">Chapter 4. 빼기의 미학: 진짜 중요한 것만 남겨라</span>
                                 <span class="toc-page-num">24</span>
+                                <span class="toc-leader"></span>
                             </li>
                             <li class="toc-item">
                                 <span class="toc-name">Chapter 5. 어려운 것도 쉽게 풀어내는 설명의 달인</span>
                                 <span class="toc-page-num">30</span>
+                                <span class="toc-leader"></span>
                             </li>
                             <li class="toc-item">
                                 <span class="toc-name">Chapter 6. 기승전결을 지배하는 논리적 연결</span>
                                 <span class="toc-page-num">36</span>
+                                <span class="toc-leader"></span>
                             </li>
                         </ul>
                     </div>
@@ -813,14 +818,17 @@
                             <li class="toc-item">
                                 <span class="toc-name">Chapter 7. 무게감을 더하는 신뢰의 화법</span>
                                 <span class="toc-page-num">44</span>
+                                <span class="toc-leader"></span>
                             </li>
                             <li class="toc-item">
                                 <span class="toc-name">Chapter 8. 상대를 움직이는 설득 기술</span>
                                 <span class="toc-page-num">50</span>
+                                <span class="toc-leader"></span>
                             </li>
                             <li class="toc-item">
                                 <span class="toc-name">Chapter 9. 끌려가지 않고 대화의 주도권 쥐기</span>
                                 <span class="toc-page-num">56</span>
+                                <span class="toc-leader"></span>
                             </li>
                         </ul>
                     </div>
@@ -831,14 +839,17 @@
                             <li class="toc-item">
                                 <span class="toc-name">Chapter 10. 성과를 증명하는 비즈니스 화법</span>
                                 <span class="toc-page-num">63</span>
+                                <span class="toc-leader"></span>
                             </li>
                             <li class="toc-item">
                                 <span class="toc-name">Chapter 11. 인간관계를 위한 말하기</span>
                                 <span class="toc-page-num">69</span>
+                                <span class="toc-leader"></span>
                             </li>
                             <li class="toc-item">
                                 <span class="toc-name">Chapter 12. 무대 위에서 당신을 증명하는 법</span>
                                 <span class="toc-page-num">75</span>
+                                <span class="toc-leader"></span>
                             </li>
                         </ul>
                     </div>
@@ -849,18 +860,22 @@
                             <li class="toc-item">
                                 <span class="toc-name">Chapter 13. 하루 10분, 압도적 차이를 만드는 훈련법</span>
                                 <span class="toc-page-num">83</span>
+                                <span class="toc-leader"></span>
                             </li>
                             <li class="toc-item">
                                 <span class="toc-name">Chapter 14. 나만의 시그니처 화법 디자인하기</span>
                                 <span class="toc-page-num">89</span>
+                                <span class="toc-leader"></span>
                             </li>
                             <li class="toc-item">
                                 <span class="toc-name">Chapter 15. 결국, 당신의 말이 당신을 증명한다</span>
                                 <span class="toc-page-num">95</span>
+                                <span class="toc-leader"></span>
                             </li>
                             <li class="toc-item">
                                 <span class="toc-name">Epilogue. 당신의 언어가 곧 당신의 브랜드다</span>
                                 <span class="toc-page-num">101</span>
+                                <span class="toc-leader"></span>
                             </li>
                         </ul>
                     </div>
@@ -871,6 +886,7 @@
                             <li class="toc-item">
                                 <span class="toc-name">Appendix 1. 책상 앞 실전 템플릿과 자가진단</span>
                                 <span class="toc-page-num">105</span>
+                                <span class="toc-leader"></span>
                             </li>
                         </ul>
                     </div>
@@ -899,8 +915,8 @@
                 </div>
 
                 <div class="section-title">01. 유창함과 명확성의 결정적 차이</div>
-                <p>주변을 둘러보면 언제나 막힘없이 청산유수로 말을 쏟아내는 이들이 있습니다. 화려한 어휘, 거침없는 속도, 청중을 압도하는 듯한 제스처까지. 우리는 대개 이런 사람들을 보고 '말을 참 잘한다'고 감탄하곤 합니다. 그러나 그들의 5분간의 독무대가 끝난 뒤, 정작 당신의 머릿속에는 무엇이 남았습니까?</p>
-                <p>"말은 화려하게 잘하는데, 그래서 핵심이 뭐지?"라는 의문이 머릿속을 맴돈 적이 있다면, 당신은 지금 <span class="highlight">'유창함의 함정(The Illusion of Fluency)'</span>에 빠진 것입니다. 비즈니스와 일상에서 진정한 지적 영향력을 발휘하는 언어는 유창함이 아닌 명확성에 기반합니다.</p>
+                <p>주변을 둘러보면 언제나 막힘없이 청산유수로 말을 쏟아내는 이들이 있습니다. 화려한 어휘, 거침없는 속도, 청중을 압도하는 듯한 유려한 제스처까지. 우리는 대개 이런 사람들을 보고 '말을 참 잘한다'고 감탄하곤 합니다. 그러나 그들의 5분간의 독무대가 끝난 뒤, 정작 당신의 머릿속에는 무엇이 남았습니까?</p>
+                <p>"말은 화려하게 잘하는데, 그래서 핵심이 뭐지?"라는 의문이 머릿속을 맴돈 적이 있다면, 당신은 지금 <span class="highlight">'유창함의 함정(The Illusion of Fluency)'</span>에 빠진 것입니다. 많은 스피치 학원에서는 청산유수처럼 흐르는 화법을 가르치지만, 비즈니스와 일상에서 진정한 지적 영향력을 발휘하는 언어는 따로 있습니다. 그것이 바로 우리가 이 책에서 다룰 '아티큘레이트 토크(Articulate Talk)', 즉 명확성에 기반한 말하기입니다.</p>
 
                 <div class="case-study-box">
                     <h4>[Case Study] 김 팀장의 화려한 PT vs 이 과장의 건조한 브리핑</h4>
@@ -953,7 +969,7 @@
                 </div>
 
                 <div class="section-title">01. 그들은 입을 열기 전에 '구조'를 짠다</div>
-                <p>A마추어 화자와 프로 커뮤니케이터의 가장 결정적인 차이는 '언제 생각을 시작하는가'에 있습니다. 하위 99%의 사람들은 입을 열면서 동시에 생각을 시작합니다. 반면, 상위 1%의 프로들은 말하기 전에 머릿속에서 이미 메시지의 설계도를 완성합니다.</p>
+                <p>아마추어 화자와 프로 커뮤니케이터의 가장 결정적인 차이는 '언제 생각을 시작하는가'에 있습니다. 하위 99%의 사람들은 입을 열면서 동시에 생각을 시작합니다. 반면, 상위 1% of 프로들은 말하기 전에 머릿속에서 이미 메시지의 설계도를 완성합니다.</p>
                 <p>프로들은 아무리 긴박한 상황이나 돌발 질문을 받더라도 즉각적으로 입을 열지 않습니다. 짧게는 1초에서 3초간 머릿속 공간을 나누고 이야기를 배치하는 구조화 과정을 반드시 거칩니다.</p>
 
                 <div class="case-study-box">
@@ -1061,12 +1077,12 @@
 
             <!-- CHAPTER 4 -->
             <section id="ch4" class="chapter-header">
-                <div class="part-indicator">PART 2. 군더더기 없이 핵심만 꽂히는 전달의 기술</div>
+                <div class="part-indicator">PART 2. 군더더기 없이 핵심만 꽂히는 전달 of 기술</div>
                 <h2 class="chapter-title">Chapter 4. 빼기의 미학: 진짜 중요한 것만 남겨라</h2>
 
                 <div class="pull-quote-page">
                     <h3>"완벽함이란 더 이상 더할 것이 없을 때가 아니라,<br>더 이상 뺄 것이 없을 때 완성된다."</h3>
-                    <p>불안감 때문에 덧붙인 쿠션어와 구구절절한 변명들은 당신의 전문성을 갉아먹는 독입니다.<br>과감하게 덜어낼수록, 메시지의 무게는 묵직해집니다.</p>
+                    <p>불안감 때문에 덧붙인 쿠션어와 구구절절한 변명들은 당신의 전문성을 가장 먼저 갉아먹는 독입니다.<br>과감하게 덜어낼수록, 메시지의 무게는 묵직해집니다.</p>
                 </div>
 
                 <div class="section-title">01. 결론부터 말해도 무례하지 않은 법</div>
@@ -1295,7 +1311,7 @@
                 <h2 class="chapter-title">Chapter 9. 끌려가지 않고 대화의 주도권 쥐기</h2>
 
                 <div class="pull-quote-page">
-                    <h3>"대화의 주도권은 목소리가 큰 사람이 아니라,<br>대화의 '프레임'을 짜는 사람이 쥔다."</h3>
+                    <h3>"대화의 주도권은 목소리가 큰 사람이 아니라,<br>대화 of '프레임'을 짜는 사람이 쥔다."</h3>
                     <p>쏟아지는 비난과 날 선 공격에 방패부터 들지 마십시오.<br>상대가 짜놓은 '과거의 실패'라는 링을 벗어나, '미래의 대안'이라는 새로운 링으로 상대를 초대하는 것이 진짜 실력입니다.</p>
                 </div>
 
@@ -1684,7 +1700,7 @@
 
                 <div class="result-box">
                     <h4 id="scoreDisplay">현재 체크 수: 0개</h4>
-                    <p class="no-indent" id="score処方箋" style="font-size: 10.5pt; line-height: 1.7; color: #332a24; word-break: keep-all;">
+                    <p class="no-indent" id="scorePrescription" style="font-size: 10.5pt; line-height: 1.7; color: #332a24; word-break: keep-all;">
                         체크박스를 클릭하시면 당신만을 위한 맞춤 처방전이 여기에 실시간으로 로드됩니다.
                     </p>
                 </div>
@@ -1713,20 +1729,20 @@
         });
 
         const display = document.getElementById('scoreDisplay');
-        const 처방 = document.getElementById('score処方箋');
+        const prescription = document.getElementById('scorePrescription');
         
         display.innerText = `현재 선택된 나의 낡은 말버릇: 총 ${count}개`;
 
         if (count === 0) {
-            처방.innerHTML = `<strong>✔ O표 ${count}개 (상위 1% Articulate Master)</strong><br>축하합니다! 완벽에 가까운 명확한 소통 능력을 지니고 있습니다. 본서의 [PART 3. 상대를 움직이는 설득 기술]을 심층 복습하시어 단순 정답을 넘어 타인의 감정적 지지까지 우아하게 견인해내는 명설설을 디자인해보세요.`;
+            prescription.innerHTML = `<strong>✔ O표 ${count}개 (상위 1% Articulate Master)</strong><br>축하합니다! 완벽에 가까운 명확한 소통 능력을 지니고 있습니다. 본서의 [PART 3. 상대를 움직이는 설득 기술]을 심층 복습하시어 단순 정답을 넘어 타인의 감정적 지지까지 우아하게 견인해내는 명설설을 디자인해보세요.`;
         } else if (count <= 2) {
             try {
-                처방.innerHTML = `<strong>✔ O표 ${count}개 (잠재적 프로 Intermediate Speaker)</strong><br>안정적이고 단단한 논리의 기틀을 소유하고 계십니다. 다만 때로 불안감이나 조급함에 의해 문장이 복문으로 길어지거나 쿠션어가 개입될 여지가 있습니다. [Chapter 4. 빼기의 미학]을 참고해 1문장 1메시지 쪼개기 루틴에 힘쓰십시오.`;
+                prescription.innerHTML = `<strong>✔ O표 ${count}개 (잠재적 프로 Intermediate Speaker)</strong><br>안정적이고 단단한 논리의 기틀을 소유하고 계십니다. 다만 때로 불안감이나 조급함에 의해 문장이 복문으로 길어지거나 쿠션어가 개입될 여지가 있습니다. [Chapter 4. 빼기의 미학]을 참고해 1문장 1메시지 쪼개기 루틴에 힘쓰십시오.`;
             } catch(e) {}
         } else if (count <= 5) {
-            처방.innerHTML = `<strong>✔ O표 ${count}개 (횡설수설 경계 단계)</strong><br>나쁜 말버릇과 언어의 해상도 흐려짐 현상이 빈번하게 감지되는 과도기 단계입니다. 입을 열기 전 3초간 서랍을 나누는 뇌내 구조화 훈련이 급선무입니다. [Chapter 2 &amp; 3]의 Action Plan을 출퇴근길에 지속해 보시길 강력 권고합니다.`;
+            prescription.innerHTML = `<strong>✔ O표 ${count}개 (횡설수설 경계 단계)</strong><br>나쁜 말버릇과 언어의 해상도 흐려짐 현상이 빈번하게 감지되는 과도기 단계입니다. 입을 열기 전 3초간 서랍을 나누는 뇌내 구조화 훈련이 급선무입니다. [Chapter 2 &amp; 3]의 Action Plan을 출퇴근길에 지속해 보시길 강력 권고합니다.`;
         } else {
-            처방.innerHTML = `<strong>✔ O표 ${count}개 (집중 언어 디톡스 대상자)</strong><br>생각이 채 정리되기 전에 입부터 열어 상대에게 과도한 인지적 스트레스를 주고 있을 확률이 95% 이상입니다. 다른 어려운 스피치 기술을 탐닉하기보다는, 당장 스마트폰 녹음기를 켜고 자신의 목소리를 기꺼이 마주하는 용기를 가질 시점입니다. [Chapter 13. 하루 10분 녹음 셀프피드백]을 1주간 지속해 말버릇부터 덜어내십시오.`;
+            prescription.innerHTML = `<strong>✔ O표 ${count}개 (집중 언어 디톡스 대상자)</strong><br>생각이 채 정리되기 전에 입부터 열어 상대에게 과도한 인지적 스트레스를 주고 있을 확률이 95% 이상입니다. 다른 어려운 스피치 기술을 탐닉하기보다는, 당장 스마트폰 녹음기를 켜고 자신의 목소리를 기꺼이 마주하는 용기를 가질 시점입니다. [Chapter 13. 하루 10분 녹음 셀프피드백]을 1주간 지속해 말버릇부터 덜어내십시오.`;
         }
     }
 </script>
